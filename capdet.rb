@@ -8,7 +8,8 @@ require 'yaml'
 ##
 # Contains classes to call codecadet web service
 module Capdet
-  API_URL = 'http://localhost:9292/api'
+  # API_URL = 'http://localhost:9292/api'
+  API_URL = 'http://simplecadet.herokuapp.com/api'
   VER = 'v1'
   EXT = 'json'
   RESOURCE = 'cadet'
@@ -21,12 +22,12 @@ module Capdet
     end
 
     def initialize(username)
-      get(username)
+      get_user(username)
     end
 
-    def get(username)
-      cadet_json = open("#{API_URL}/#{VER}/#{RESOURCE}/#{username}.#{EXT}").read
-      cadet_h = JSON.parse(cadet_json)
+    def get_user(username)
+      request_url = "#{API_URL}/#{VER}/#{RESOURCE}/#{username}.#{EXT}"
+      cadet_h = HTTParty.get(request_url)
 
       @name = cadet_h['id']
       @type = cadet_h['type']
@@ -55,7 +56,7 @@ module Capdet
   end
 end
 
-# cap = Cadet.new('soumya.ray')
+# cap = Capdet::Cadet.new('soumya.ray')
 # puts cap.badges.to_yaml
 
 # Capdet::Academy.check(['soumya.ray', 'chenlizhan'],
