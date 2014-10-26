@@ -2,6 +2,8 @@ require 'open-uri'
 require 'json'
 require 'yaml'
 
+##
+# This class captures information about a user returned codebadges.herokuapp.com
 class Cadet
   attr_reader :name, :type, :badges
   def initialize(username)
