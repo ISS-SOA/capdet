@@ -5,13 +5,15 @@ require 'httparty'
 require 'json'
 require 'yaml'
 
+##
+# Contains classes to call codecadet web service
 module Capdet
   API_URL = 'http://localhost:9292/api'
   VER = 'v1'
   EXT = 'json'
   RESOURCE = 'cadet'
   ##
-  # This class captures information about a user returned codebadges.herokuapp.com
+  # Captures information about a single user
   class Cadet
     attr_reader :name, :type, :badges
 
@@ -36,7 +38,7 @@ module Capdet
   end
 
   ##
-  # Runs class level operations from codebadges.herokuapp.com
+  # Captures user group level information
   class Academy
     def self.check(usernames, badges)
       params_h = {
@@ -56,5 +58,5 @@ end
 # cap = Cadet.new('soumya.ray')
 # puts cap.badges.to_yaml
 
-#Capdet::Academy.check(['soumya.ray', 'chenlizhan'],
+# Capdet::Academy.check(['soumya.ray', 'chenlizhan'],
 #                      ['Object-Oriented Programming II'])
